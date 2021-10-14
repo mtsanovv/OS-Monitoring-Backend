@@ -11,7 +11,7 @@ our $PROC_MEMINFO_FILE_PATH = '/proc/meminfo';
 
 sub logRequest {
     my ($method, $path) = @_;
-    info "Received $method request to $path";
+    info "Received $method request for $path";
     return 1;
 }
 
