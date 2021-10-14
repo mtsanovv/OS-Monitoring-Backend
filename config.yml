@@ -7,6 +7,9 @@
 # Your application's name
 appname: "OSMonitoring"
 
+# Use JSON as serialization for the REST API
+serializer: "JSON"
+
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
 layout: "main"
@@ -15,6 +18,15 @@ layout: "main"
 # all the magic of encoding and decoding. You should not care
 # about unicode within your app when this setting is set (recommended).
 charset: "UTF-8"
+
+# Logger config
+
+logger: log4perl
+log: core
+engines:
+   logger:
+      log4perl:
+         config_file: log4perl.conf
 
 # === Engines ===
 #
