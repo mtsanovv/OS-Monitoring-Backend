@@ -1,32 +1,25 @@
 package OSMonitoring::Models::User;
 
-sub new {
-    my ($class, $username, $password) = @_;
-    my $user = {
-        username => $username,
-        password => $password
-    };
+use parent qw(OSMonitoring::Models::BaseRequestModel);
 
-    my $self = {
-        user => $user
-    };
+my $USER_MODEL_VALIDATION_REGEXES = {
+    username => '^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$',
+    password => '^.{8,}$'
+};
 
-    bless $self, $class;
-}
-
-sub getUser {
+sub validate {
     my ($self) = @_;
-    return $self->{user};
+    return $self->SUPER::validate($USER_MODEL_VALIDATION_REGEXES);
 }
 
 sub getUsername {
     my ($self) = @_;
-    return $self->getUser()->{username};
+    return $self->getData()->{username};
 }
 
 sub getPassword {
     my ($self) = @_;
-    return $self->getUser()->{password};
+    return $self->getData()->{password};
 }
 
 1;
