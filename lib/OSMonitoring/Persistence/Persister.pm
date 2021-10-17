@@ -28,7 +28,8 @@ sub parseEtcPasswd {
     foreach my $line (@etcPasswdLines) {
         chomp $line;
         my ($username, $passwordMask, $uid, $gid, $comments, $home, $shell) = split(/:/, $line);
-        my $userDisplayName = (split(/,/, $comments))[0];
+        my $userDisplayName = '';
+        $userDisplayName = (split(/,/, $comments))[0] if length($comments);
         my $isCreatedByOsMonitor = $self->createdByOsMonitorFileExists($home);
         my $userHash = {
             username => $username,
@@ -64,7 +65,6 @@ sub createCreatedByOsMonitorFile {
     my $userHomeDir = File::HomeDir->users_home($username);
     my $createdByOsMonitorFile = "$userHomeDir/$CREATED_BY_OSMONITOR";
     my $createdByOsMonitorFileExists = $self->createdByOsMonitorFileExists($userHomeDir);
-    info "exists?: $createdByOsMonitorFileExists";
     if(!$createdByOsMonitorFileExists) {
         my $createdByOsMonitorFh = IO::File->new($createdByOsMonitorFile, 'w')
             or die "Error when creating user: cannot open $createdByOsMonitorFile: $!";
