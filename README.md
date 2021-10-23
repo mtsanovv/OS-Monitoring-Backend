@@ -2,6 +2,7 @@
 A Perl REST API that monitors Linux OS status & manages users. This is the backbone of [OS-Monitoring-Frontend](https://github.com/mtsanovv/OS-Monitoring-Frontend).
 
 ## Prerequisites
+- make and gcc
 - Perl 5.30.0 (or you might try testing a new version)
 - The following Perl modules: Dancer2, Dancer2::Logger::Log4perl, Starman, Filesys::Df, File::HomeDir
 - root/sudo access
