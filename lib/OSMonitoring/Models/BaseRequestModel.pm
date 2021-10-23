@@ -18,7 +18,7 @@ sub validate {
     foreach my $key(keys %{$model}) {
         if(!exists $data->{$key}) {
             error "Required model key $key does not exist when attempting to validate a model for $class";
-            $self->setErrorMessage("Error when creating $class model: required key '$key' does not exist in the request JSON");
+            $self->setErrorMessage("Error when creating $class model: required key '$key' does not exist in the request JSON.");
             return 0;
         }
         # key exists - we now need to validate its value
@@ -29,7 +29,7 @@ sub validate {
         }
         if($data->{$key} !~ /$regex/) {
             error "Value for the key $key does not match $regexValue in the request JSON";
-            $self->setErrorMessage("Error when creating $class model: Value for the key '$key' does not match $regexValue in the request JSON");
+            $self->setErrorMessage("Error when creating $class model: Value for the key '$key' does not match $regexValue in the request JSON.");
             return 0;
         }
         return 1;

@@ -30,7 +30,7 @@ sub createUser {
     my ($username, $password) = ($userModel->getUsername(), $userModel->getPassword());
 
     if(defined scalar getpwnam($username)) {
-        $self->setErrorMessage('Cannot create user: username is already in use');
+        $self->setErrorMessage('Cannot create user: username is already in use.');
         return 0;
     }
 
@@ -54,13 +54,13 @@ sub createUser {
 sub deleteUser {
     my ($self, $username, $userDeletionModel) = @_;
     if(!defined getpwnam($username)) {
-        $self->setErrorMessage("Cannot delete user: user not found");
+        $self->setErrorMessage("Cannot delete user: user not found.");
         return 0;
     }
     my $allUsers = $self->getAllUsers();
     my $escapedUsername = quotemeta($username);
     if(!grep($_->{username} =~ /\A$escapedUsername\z/ && $_->{isCreatedByOsMonitor}, @{$allUsers})) {
-        $self->setErrorMessage("Cannot delete user: user not created by OSMonitoring");
+        $self->setErrorMessage("Cannot delete user: user not created by OSMonitoring.");
         return 0;
     }
     my @command = ('userdel');
